@@ -93,7 +93,7 @@ EOF
 
 gen_ifconfig() {
   cat <<EOF
-$(awk -F "/" '{print "ifconfig eth0 inet6 add " $5 "/64"}' ${WORKDATA})
+$(awk -F "/" '{print "ifconfig eth0 inet6 add " $5 "/32"}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
@@ -127,7 +127,7 @@ gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
 cat >>/etc/rc.local <<EOF
 bash ${WORKDIR}/boot_iptables.sh
 bash ${WORKDIR}/boot_ifconfig.sh
-ulimit -n 10048
+ulimit -n 100480
 service 3proxy start
 EOF
 
